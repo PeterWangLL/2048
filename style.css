@@ -10,46 +10,50 @@ body {
     align-items: center;
     background: var(--dracular-background);
     font-family: 'Inter', sans-serif;
-    padding: 20px;
+    padding: 15px;
     color: var(--dracular-foreground);
 }
 
 .score-container {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     margin-bottom: 20px;
 }
 
 .score-box {
     background: var(--dracular-current);
-    padding: 10px 25px;
-    border-radius: 6px;
+    padding: 8px 20px;
+    border-radius: var(--border-radius);
     color: var(--dracular-foreground);
     text-align: center;
     min-width: 100px;
-    box-shadow: 0 0 15px rgba(98, 114, 164, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1),
+                0 2px 4px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--dracular-comment);
 }
 
 .score-label {
     font-size: 13px;
     color: var(--dracular-comment);
+    margin-bottom: 3px;
 }
 
 #score, #best-score {
-    font-size: 25px;
+    font-size: 24px;
     font-weight: bold;
     color: var(--dracular-purple);
 }
 
 .game-container {
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
     background: var(--dracular-current);
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 30px rgba(98, 114, 164, 0.2);
+    border-radius: var(--border-radius);
+    padding: var(--container-padding);
+    margin-bottom: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2),
+                0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
     border: 2px solid var(--dracular-comment);
 }
 
@@ -57,34 +61,35 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    gap: 15px;
+    gap: 12px;
     width: 100%;
     height: 100%;
     background: var(--dracular-current);
 }
 
 .cell {
-    background: var(--dracular-selection);
-    border-radius: 6px;
+    background: var(--cell-empty);
+    border-radius: var(--border-radius);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 45px;
-    font-weight: bold;
+    font-size: 35px;
+    font-weight: 700;
     color: var(--dracular-foreground);
     aspect-ratio: 1;
     position: relative;
     will-change: transform;
-    box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.1);
+    box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.15s ease-in-out;
 }
 
 @keyframes appear {
     0% {
         opacity: 0;
-        transform: scale(0.6);
+        transform: scale(0.5);
     }
-    50% {
-        transform: scale(1.1);
+    70% {
+        transform: scale(1.05);
     }
     100% {
         opacity: 1;
@@ -93,26 +98,30 @@ body {
 }
 
 .tile-new {
-    animation: appear 0.2s ease-in-out;
+    animation: appear 0.2s ease-out;
     z-index: 2;
 }
 
 .new-game-btn {
     background: var(--dracular-purple);
-    border-radius: 6px;
-    padding: 12px 25px;
+    border-radius: var(--border-radius);
+    padding: 10px 25px;
     color: var(--dracular-background);
-    font-weight: bold;
+    font-weight: 600;
     border: none;
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(189, 147, 249, 0.4);
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(189, 147, 249, 0.2),
+                0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 10px;
+    font-size: 14px;
 }
 
 .new-game-btn:hover {
     background: var(--dracular-pink);
     transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(189, 147, 249, 0.4);
+    box-shadow: 0 6px 16px rgba(189, 147, 249, 0.25),
+                0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Dracula 主题配色变量 */
@@ -129,43 +138,45 @@ body {
     --dracular-purple: #bd93f9;
     --dracular-red: #ff5555;
     --dracular-yellow: #f1fa8c;
+
+    --border-radius: 8px;
+    --tile-radius: 8px;
+    --gap-size: 10px;
+    --container-padding: 12px;
+
+    --cell-empty: #3a3d4d;
+    --cell-shadow: #363848;
 }
 
 /* 数字块的 Dracula 主题配色 */
 .tile-2 {
     background: var(--dracular-comment);
     color: var(--dracular-foreground);
-    border: 1px solid var(--dracular-current);
 }
 
 .tile-4 {
     background: var(--dracular-purple);
     color: var(--dracular-background);
-    border: 1px solid var(--dracular-selection);
 }
 
 .tile-8 {
     background: var(--dracular-pink);
     color: var(--dracular-background);
-    border: 1px solid var(--dracular-purple);
 }
 
 .tile-16 {
     background: var(--dracular-red);
     color: var(--dracular-foreground);
-    border: 1px solid var(--dracular-pink);
 }
 
 .tile-32 {
     background: var(--dracular-orange);
     color: var(--dracular-background);
-    border: 1px solid var(--dracular-purple);
 }
 
 .tile-64 {
     background: var(--dracular-yellow);
     color: var(--dracular-background);
-    border: 1px solid var(--dracular-pink);
 }
 
 .tile-128 {
@@ -189,7 +200,7 @@ body {
     color: var(--dracular-background);
     font-size: 40px;
     border: 2px solid var(--dracular-yellow);
-    box-shadow: 0 0 25px rgba(189, 147, 249, 0.4);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     border: 2px solid var(--dracular-pink);
 }
 
@@ -198,7 +209,7 @@ body {
     color: var(--dracular-background);
     font-size: 35px;
     border: 2px solid var(--dracular-purple);
-    box-shadow: 0 0 30px rgba(255, 121, 198, 0.4);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .tile-2048 {
@@ -206,7 +217,7 @@ body {
     color: var(--dracular-foreground);
     font-size: 35px;
     border: 3px solid var(--dracular-pink);
-    box-shadow: 0 0 35px rgba(255, 85, 85, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 @keyframes merge {
@@ -230,27 +241,100 @@ body {
     z-index: 2;
 }
 
-/* 为所有数字块添加优雅的悬停效果 */
+/* 数字块基础样式 */
 [class^="tile-"] {
-    transition: all 0.2s ease-in-out;
-    animation: appear 0.2s ease-in-out;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.15s ease-out;
+    border: none;
+    box-shadow: none;
 }
 
+/* 空格子样式 */
+.cell {
+    background: var(--cell-empty);
+    border-radius: var(--border-radius);
+    box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 数字块样式 - 完全移除阴影 */
+.tile-2 {
+    background: var(--dracular-comment);
+    color: var(--dracular-foreground);
+}
+
+.tile-4 {
+    background: var(--dracular-purple);
+    color: var(--dracular-background);
+}
+
+.tile-8 {
+    background: var(--dracular-pink);
+    color: var(--dracular-background);
+}
+
+.tile-16 {
+    background: var(--dracular-red);
+    color: var(--dracular-foreground);
+}
+
+.tile-32 {
+    background: var(--dracular-orange);
+    color: var(--dracular-background);
+}
+
+.tile-64 {
+    background: var(--dracular-yellow);
+    color: var(--dracular-background);
+}
+
+.tile-128 {
+    background: var(--dracular-green);
+    color: var(--dracular-background);
+}
+
+.tile-256 {
+    background: var(--dracular-cyan);
+    color: var(--dracular-background);
+}
+
+.tile-512 {
+    background: var(--dracular-purple);
+    color: var(--dracular-background);
+}
+
+.tile-1024 {
+    background: var(--dracular-pink);
+    color: var(--dracular-background);
+}
+
+.tile-2048 {
+    background: var(--dracular-red);
+    color: var(--dracular-foreground);
+}
+
+/* 简化的悬停效果 */
 [class^="tile-"]:hover {
     transform: scale(1.02);
-    z-index: 1;
 }
 
+/* 动画效果 */
 @keyframes appear {
     0% {
         opacity: 0;
-        transform: scale(0.6);
-    }
-    50% {
-        transform: scale(1.1);
+        transform: scale(0.5);
     }
     100% {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+.tile-new {
+    animation: appear 0.2s ease-out;
 }
