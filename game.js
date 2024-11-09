@@ -6,6 +6,7 @@ class Game2048 {
         this.bestScore = localStorage.getItem('bestScore') || 0;
         this.isAnimating = false;
         this.mergedTiles = new Set();
+        this.isGameOver = false;
         this.init();
     }
 
@@ -34,6 +35,8 @@ class Game2048 {
     }
 
     async move(direction) {
+        if (this.isGameOver) return;
+        
         if (this.isAnimating) return;
         
         this.isAnimating = true;
@@ -61,7 +64,7 @@ class Game2048 {
 
         this.isAnimating = false;
 
-        if (this.isGameOver()) {
+        if (this.checkGameOver()) {
             setTimeout(() => alert('Game Over!'), 300);
         }
     }
@@ -222,15 +225,45 @@ class Game2048 {
         return moved;
     }
 
-    isGameOver() {
-        for (let i = 0; i < this.size; i++) {
-            for (let j = 0; j < this.size; j++) {
-                if (this.grid[i][j] === 0) return false;
-                if (j < this.size - 1 && this.grid[i][j] === this.grid[i][j + 1]) return false;
-                if (i < this.size - 1 && this.grid[i][j] === this.grid[i + 1][j]) return false;
+    checkGameOver() {
+        if (this.isGameOver) return true;
+
+        let canMove = false;
+        
+        // 检查是否还有空格子
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                if (this.grid[i][j] === 0) {
+                    return false;
+                }
+                
+                // 检查水平方向是否可以合并
+                if (j < 3 && this.grid[i][j] === this.grid[i][j + 1]) {
+                    return false;
+                }
+                
+                // 检查垂直方向是否可以合并
+                if (i < 3 && this.grid[i][j] === this.grid[i + 1][j]) {
+                    return false;
+                }
             }
         }
+
+        // 如果到这里，说明游戏确实结束了
+        if (!canMove) {
+            this.isGameOver = true;
+        }
+
         return true;
+    }
+
+    resetGame() {
+        this.isGameOver = false;
+        this.grid = Array(this.size).fill().map(() => Array(this.size).fill(0));
+        this.score = 0;
+        this.addNewTile();
+        this.addNewTile();
+        this.updateView();
     }
 
     updateView() {
@@ -286,6 +319,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 新游戏按钮
     document.getElementById('new-game').addEventListener('click', () => {
-        game.init();
+        game.resetGame();
     });
 }); 
