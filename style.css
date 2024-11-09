@@ -69,7 +69,8 @@ body {
 
 .cell {
     background: var(--cell-empty);
-    border-radius: var(--border-radius);
+    border-radius: 8px;
+    box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,7 +80,6 @@ body {
     aspect-ratio: 1;
     position: relative;
     will-change: transform;
-    box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.15s ease-in-out;
 }
 
@@ -148,76 +148,88 @@ body {
     --cell-shadow: #363848;
 }
 
-/* 数字块的 Dracula 主题配色 */
+/* 数字块的新样式 - 纯色无阴影 */
+[class^="tile-"] {
+    border-radius: 8px;
+    font-weight: 700;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.15s ease-out;
+}
+
+/* 更新数字块颜色 - 使用更鲜艳的颜色 */
 .tile-2 {
-    background: var(--dracular-comment);
-    color: var(--dracular-foreground);
+    background: #7B8AB8;
+    color: white;
 }
 
 .tile-4 {
-    background: var(--dracular-purple);
-    color: var(--dracular-background);
+    background: #B388FF;
+    color: white;
 }
 
 .tile-8 {
-    background: var(--dracular-pink);
-    color: var(--dracular-background);
+    background: #FF79B0;
+    color: white;
 }
 
 .tile-16 {
-    background: var(--dracular-red);
-    color: var(--dracular-foreground);
+    background: #FF5252;
+    color: white;
 }
 
 .tile-32 {
-    background: var(--dracular-orange);
-    color: var(--dracular-background);
+    background: #FFB74D;
+    color: white;
 }
 
 .tile-64 {
-    background: var(--dracular-yellow);
-    color: var(--dracular-background);
+    background: #F4FF81;
+    color: #776e65;
 }
 
 .tile-128 {
-    background: var(--dracular-green);
-    color: var(--dracular-background);
-    font-size: 40px;
-    border: 2px solid var(--dracular-red);
-    box-shadow: 0 0 15px rgba(80, 250, 123, 0.3);
+    background: #69F0AE;
+    color: #776e65;
 }
 
 .tile-256 {
-    background: var(--dracular-cyan);
-    color: var(--dracular-background);
-    font-size: 40px;
-    border: 2px solid var(--dracular-orange);
-    box-shadow: 0 0 20px rgba(139, 233, 253, 0.3);
+    background: #84FFFF;
+    color: #776e65;
 }
 
 .tile-512 {
-    background: var(--dracular-purple);
-    color: var(--dracular-background);
-    font-size: 40px;
-    border: 2px solid var(--dracular-yellow);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    border: 2px solid var(--dracular-pink);
+    background: #B388FF;
+    color: white;
 }
 
 .tile-1024 {
-    background: var(--dracular-pink);
-    color: var(--dracular-background);
-    font-size: 35px;
-    border: 2px solid var(--dracular-purple);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background: #FF79B0;
+    color: white;
 }
 
 .tile-2048 {
-    background: var(--dracular-red);
-    color: var(--dracular-foreground);
-    font-size: 35px;
-    border: 3px solid var(--dracular-pink);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background: #FF5252;
+    color: white;
+}
+
+/* 动画效果 */
+.tile-new {
+    animation: appear 0.2s ease-out;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes merge {
@@ -241,100 +253,7 @@ body {
     z-index: 2;
 }
 
-/* 数字块基础样式 */
-[class^="tile-"] {
-    border-radius: var(--border-radius);
-    font-weight: 700;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.15s ease-out;
-    border: none;
-    box-shadow: none;
-}
-
-/* 空格子样式 */
-.cell {
-    background: var(--cell-empty);
-    border-radius: var(--border-radius);
-    box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* 数字块样式 - 完全移除阴影 */
-.tile-2 {
-    background: var(--dracular-comment);
-    color: var(--dracular-foreground);
-}
-
-.tile-4 {
-    background: var(--dracular-purple);
-    color: var(--dracular-background);
-}
-
-.tile-8 {
-    background: var(--dracular-pink);
-    color: var(--dracular-background);
-}
-
-.tile-16 {
-    background: var(--dracular-red);
-    color: var(--dracular-foreground);
-}
-
-.tile-32 {
-    background: var(--dracular-orange);
-    color: var(--dracular-background);
-}
-
-.tile-64 {
-    background: var(--dracular-yellow);
-    color: var(--dracular-background);
-}
-
-.tile-128 {
-    background: var(--dracular-green);
-    color: var(--dracular-background);
-}
-
-.tile-256 {
-    background: var(--dracular-cyan);
-    color: var(--dracular-background);
-}
-
-.tile-512 {
-    background: var(--dracular-purple);
-    color: var(--dracular-background);
-}
-
-.tile-1024 {
-    background: var(--dracular-pink);
-    color: var(--dracular-background);
-}
-
-.tile-2048 {
-    background: var(--dracular-red);
-    color: var(--dracular-foreground);
-}
-
 /* 简化的悬停效果 */
 [class^="tile-"]:hover {
     transform: scale(1.02);
-}
-
-/* 动画效果 */
-@keyframes appear {
-    0% {
-        opacity: 0;
-        transform: scale(0.5);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.tile-new {
-    animation: appear 0.2s ease-out;
 }
